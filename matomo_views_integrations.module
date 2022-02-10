@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Contains custom_views_argument.module.
+ */
+
+/**
+ * Implements hook_views_data_alter().
+ *
+ * {@see hook_views_data_alter}
+ */
+function matomo_views_integrations_views_data_alter(array &$data) {
+  if (isset($data["node_field_data"]["nid"])) {
+    $data['node_field_data']['nid_matomo_dimension'] = [
+      'title' => t('Matomo Dimension Filter'),
+      'group' => t('Content'),
+      'filter' => [
+        'title' => t('Matomo Dimension ID Filter'),
+        'help' => t('Filter node id based on Matomo Dimension results'),
+        'field' => 'nid',
+        'id' => 'matomo_views_dimension',
+      ],
+    ];
+  }
+}

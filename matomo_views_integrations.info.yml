@@ -1,0 +1,10 @@
+type: module
+name: 'Matomo views integrations'
+description: 'Matomo views integration'
+package: Views
+core_version_requirement: ^8.8 || ^9
+
+# Dependencies
+dependencies:
+  - views
+  - matomo_reporting_api
