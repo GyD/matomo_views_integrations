@@ -24,3 +24,65 @@ function matomo_views_integrations_views_data_alter(array &$data) {
     ];
   }
 }
+
+/**
+ * Implements hook_views_data().
+ */
+function matomo_views_integrations_views_data() {
+  $data = [
+    'matomo_views_dimension' => [
+      'table' => [
+        'group' => 'Matomo Dimension',
+        'base' => [
+          'title' => t('Matomo Dimension'),
+          'help' => t('Queries Matomo'),
+          'query_id' => 'matomo_views_dimension',
+        ],
+      ],
+      'label' => [
+        'title' => t('Label'),
+        'help' => t('Label field returned by Matomo API'),
+        'field' => ['id' => 'matomo_views_dimension_standard',],
+        'sort' => ['id' => 'matomo_views_dimension_standard',],
+      ],
+      'node' => [
+        'title' => t('Node'),
+        'help' => t('Node field returned by Matomo API'),
+        'field' => ['id' => 'matomo_views_dimension_standard',],
+      ],
+      'node_target_id' => [
+        'title' => t('Node target'),
+        'help' => t('Node field returned by Matomo API'),
+        'field' => [
+          'id' => 'matomo_views_dimension_node_target_id',
+          'real field' => 'label',
+        ],
+      ],
+    ],
+  ];
+
+
+  $entity_type_manager = Drupal::entityTypeManager();
+
+  // Add a relationship to the target entity type.
+  $target_entity_type_id = 'node';
+  $target_entity_type = $entity_type_manager->getDefinition($target_entity_type_id);
+  $target_base_table = $target_entity_type->getDataTable() ?: $target_entity_type->getBaseTable();
+  //$field_name = $field_storage->getName();
+
+
+  $data['matomo_views_dimension']['node_target_id']['relationship'] = [
+    'title' => 'relationship',
+    'label' => 'label',
+    'group' => 'Content',
+    'help' => 'test',
+    'id' => 'node',
+    'base' => $target_base_table,
+    'entity type' => $target_entity_type_id,
+    'base field' => $target_entity_type->getKey('id'),
+    'real field' => 'label',
+    'relationship field' => 'label',
+  ];
+
+  return $data;
+}
