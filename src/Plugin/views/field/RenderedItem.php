@@ -81,7 +81,7 @@ class RenderedItem extends FieldPluginBase {
         '#type' => 'select',
         '#options' => $no_view_mode_option + $view_modes,
         '#title' => 'View mode',
-        '#default_value' => key($view_modes),
+        '#default_value' => $this->options['view_mode'],
       ];
     }
   }
