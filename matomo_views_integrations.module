@@ -58,6 +58,13 @@ function matomo_views_integrations_views_data() {
           'real field' => 'label',
         ],
       ],
+      'rendered_item' => [
+        'title' => t('Rendered item'),
+        'help' => t('Rendered item from Matomo API'),
+        'field' => [
+          'id' => 'matomo_views_integrations_rendered_item',
+        ],
+      ],
     ],
   ];
 
@@ -70,8 +77,7 @@ function matomo_views_integrations_views_data() {
   $target_base_table = $target_entity_type->getDataTable() ?: $target_entity_type->getBaseTable();
   //$field_name = $field_storage->getName();
 
-
-  $data['matomo_views_dimension']['node_target_id']['relationship'] = [
+  $data['matomo_views_dimension']['nid']['relationship'] = [
     'title' => 'relationship',
     'label' => 'label',
     'group' => 'Content',
@@ -80,8 +86,6 @@ function matomo_views_integrations_views_data() {
     'base' => $target_base_table,
     'entity type' => $target_entity_type_id,
     'base field' => $target_entity_type->getKey('id'),
-    'real field' => 'label',
-    'relationship field' => 'label',
   ];
 
   return $data;

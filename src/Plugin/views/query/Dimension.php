@@ -113,6 +113,8 @@ class Dimension extends QueryPluginBase {
       $result_row = new ResultRow();
       $view->result[] = $result_row;
 
+      $result_row->_entity = $item->_entity;
+
       foreach ($view->field as $field_name => $field) {
         if( isset($field->realField)){
           $result_row->{$field_name} = [$item->{$field->realField}];
@@ -160,6 +162,10 @@ class Dimension extends QueryPluginBase {
       'idDimension' => $this->options['idDimension'],
     ]);
     $response = $query->execute()->getResponse();
+
+    foreach ($response as &$responseRow){
+      $responseRow->_entity = node_load(17);
+    }
 
     return $response;
   }
@@ -259,6 +265,22 @@ class Dimension extends QueryPluginBase {
     return $options;
   }
 
-  public function ensu
+  /**
+   * Ensures a table exists in the query.
+   *
+   * This replicates the interface of Views' default SQL backend to simplify
+   * the Views integration of the Search API. Since the Search API has no
+   * concept of "tables", this method implementation does nothing. If you are
+   * writing Search API-specific Views code, there is therefore no reason at all
+   * to call this method.
+   * See https://www.drupal.org/node/2484565 for more information.
+   *
+   * @return string
+   *   An empty string.
+   */
+  public function ensureTable() {
+    return '';
+  }
+
 
 }
