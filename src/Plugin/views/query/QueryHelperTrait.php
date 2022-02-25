@@ -134,6 +134,7 @@ trait QueryHelperTrait {
     $response = $query->execute()->getResponse();
 
     foreach ($response as &$responseRow) {
+      $this->loadEntity($responseRow);
       $responseRow->_entity = node_load(17);
     }
 
