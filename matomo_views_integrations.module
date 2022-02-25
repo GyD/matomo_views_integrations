@@ -36,13 +36,22 @@ function matomo_views_integrations_views_data() {
         'base' => [
           'title' => t('Matomo Dimension'),
           'help' => t('Queries Matomo'),
-          'query_id' => 'matomo_views_dimension',
+          'query_id' => 'matomo_views_integrations_dimension',
         ],
       ],
       'label' => [
         'title' => t('Label'),
         'help' => t('Label field returned by Matomo API'),
         'field' => ['id' => 'matomo_views_dimension_standard',],
+        'sort' => ['id' => 'matomo_views_dimension_standard',],
+      ],
+      'url' => [
+        'title' => t('Url'),
+        'help' => t('Url field returned by Matomo API'),
+        'field' => [
+          'id' => 'matomo_views_dimension_standard',
+          'real field' => 'Actions_PageUrl',
+        ],
         'sort' => ['id' => 'matomo_views_dimension_standard',],
       ],
       'node' => [
@@ -64,6 +73,22 @@ function matomo_views_integrations_views_data() {
         'field' => [
           'id' => 'matomo_views_integrations_rendered_item',
         ],
+      ],
+    ],
+    'matomo_views_pageurls' => [
+      'table' => [
+        'group' => 'Matomo PageUrls',
+        'base' => [
+          'title' => t('Matomo PageUrls'),
+          'help' => t('Queries Matomo'),
+            'query_id' => 'matomo_views_integrations_pageurls',
+        ],
+      ],
+      'label' => [
+        'title' => t('Label'),
+        'help' => t('Label field returned by Matomo API'),
+        'field' => ['id' => 'matomo_views_dimension_standard',],
+        'sort' => ['id' => 'matomo_views_dimension_standard',],
       ],
     ],
   ];
