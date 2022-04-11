@@ -88,9 +88,6 @@ class PageUrls extends QueryPluginBase {
       $matomoAnswer->entity_type = 'node';
       $matomoAnswer->hasEntity = TRUE;
     }
-
-    xdebug_break();
   }
-
 
 }
