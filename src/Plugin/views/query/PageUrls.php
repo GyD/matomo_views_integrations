@@ -68,7 +68,11 @@ class PageUrls extends QueryPluginBase {
       $path = $alias_manager->getPathByAlias($url_no_langcode);
     }
 
-    $params = Url::fromUserInput($path)->getRouteParameters();
+    $url_fromUserInput = Url::fromUserInput($path);
+    $params = [];
+    if($url_fromUserInput->isRouted() ) {
+      $params = $url_fromUserInput->getRouteParameters();
+    }
 
     if (!empty($params['node'])) {
       /** @var \Drupal\node\Entity\Node $node */
